@@ -1,12 +1,12 @@
 type TrendInfo = {
-    author: string,
-    name: string,
-    href: string,
-    description: string,
-    language: string,
-    stars: number,
-    forks: number,
-    starsInPeriod: number
+    author: string;
+    name: string;
+    href: string;
+    description: string;
+    language: string;
+    stars: number;
+    forks: number;
+    starsInPeriod: number;
 }
 
 type RepoDetails = {
@@ -18,8 +18,10 @@ type RepoDetails = {
     forks: number;
     watchers: number;
     openIssues: number;
+    contributors: number;
     language: string;
     updatedAt: string;
+    html_url: string;
     trendData: {
         labels: string[];
         data: number[];
@@ -38,6 +40,8 @@ type RepoResponse = {
     open_issues_count: number;
     language: string;
     updated_at: string;
+    html_url: string;
+    contributors: number;
 };
 
 

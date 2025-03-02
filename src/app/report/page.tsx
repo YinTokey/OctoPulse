@@ -2,6 +2,8 @@ import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import axios from "axios";
 import { RepoDetails, RepoResponse} from "@/types/github";
+import HeaderTable from "@/app/components/HeaderTable";
+import { formatUpdatedAt } from "@/utils/date";
 
 function mapRepoData(apiRepo: RepoResponse): RepoDetails {
     return {
@@ -14,8 +16,9 @@ function mapRepoData(apiRepo: RepoResponse): RepoDetails {
         watchers: apiRepo.watchers_count,
         openIssues: apiRepo.open_issues_count,
         language: apiRepo.language,
-        updatedAt: new Date(apiRepo.updated_at).toLocaleDateString(),
-        // Simulate historical trend data for the chart
+        html_url: apiRepo.html_url,
+        contributors: apiRepo.contributors,
+        updatedAt: formatUpdatedAt(apiRepo.updated_at),
         trendData: {
             labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
             data: [
@@ -54,15 +57,7 @@ export default async function Page() {
             </Head>
 
             <div className="max-w-4xl mx-auto p-6 bg-white shadow rounded">
-                {/* Overview Section */}
-                <header className="text-center mb-10">
-                    <h1 className="text-5xl font-extrabold text-blue-700">
-                        Weekly GitHub Trend Report
-                    </h1>
-                    <p className="text-gray-600 mt-2 text-lg">
-                        A snapshot of top trending repositories and their performance metrics
-                    </p>
-                </header>
+                <HeaderTable repos={repos} />
 
                 <div className="border-t-2 border-gray-200 my-8"></div>
 

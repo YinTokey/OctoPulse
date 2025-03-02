@@ -1,7 +1,6 @@
 import axios from "axios"
 import * as cheerio from 'cheerio';
 import { TrendInfo } from "@/types/github";
-import {headers} from "next/headers";
 
 class GithubAPI {
 
@@ -81,7 +80,12 @@ class GithubAPI {
     }
 
     static async contributors(author: string, name: string) {
-        return await axios.get(`https://api.github.com/repos/${author}/${name}/contributors`)
+        return await axios.get(`https://api.github.com/repos/${author}/${name}/contributors`, {
+            headers: {
+                'Authorization': `token ${process.env.GITHUB_TOKEN}`,
+                'Accept': 'application/vnd.github.v3+json'
+            }
+        })
     }
 
     static async commits(author: string, name: string) {
