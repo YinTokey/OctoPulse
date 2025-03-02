@@ -1,6 +1,7 @@
 import axios from "axios"
 import * as cheerio from 'cheerio';
 import { TrendInfo } from "@/types/github";
+import {headers} from "next/headers";
 
 class GithubAPI {
 
@@ -17,7 +18,6 @@ class GithubAPI {
             const rawTitle = $(repoElement).find('h2.h3 a').text().trim();
             const title = rawTitle.replace(/\s/g, ''); // Remove all whitespace
             const [author, name] = title.split('/');
-            console.log(rawTitle);
 
             // Construct the URLs used in the DOM for stars and forks
             const starLink = `/${author}/${name}/stargazers`;
@@ -68,7 +68,12 @@ class GithubAPI {
     }
 
     static async repoInfo(author: string, name: string) {
-        return await axios.get(`https://api.github.com/repos/${author}/${name}`)
+        return await axios.get(`https://api.github.com/repos/${author}/${name}`, {
+            headers: {
+                'Authorization': `token ${process.env.GITHUB_TOKEN}`,
+                'Accept': 'application/vnd.github.v3+json'
+            }
+        })
     }
 
     static async stargazers(author: string, name: string) {
