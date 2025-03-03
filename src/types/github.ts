@@ -9,6 +9,12 @@ type TrendInfo = {
     starsInPeriod: number;
 }
 
+type TrendData = {
+    labels: string[];
+    data: number[];
+    color: string;
+}
+
 type RepoDetails = {
     id: number;
     name: string;
@@ -22,11 +28,8 @@ type RepoDetails = {
     language: string;
     updatedAt: string;
     html_url: string;
-    trendData: {
-        labels: string[];
-        data: number[];
-        color: string;
-    };
+    trendData: TrendData;
+    chartImage?: string;
 };
 
 type RepoResponse = {
@@ -45,4 +48,4 @@ type RepoResponse = {
 };
 
 
-export type { TrendInfo, RepoDetails, RepoResponse }
+export type { TrendInfo, RepoDetails, RepoResponse, TrendData }

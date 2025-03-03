@@ -1,4 +1,5 @@
 // src/app/components/HeaderTable.tsx
+
 import Link from 'next/link';
 import { FiExternalLink } from 'react-icons/fi';
 import { RepoDetails } from "@/types/github";
