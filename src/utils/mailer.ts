@@ -19,6 +19,7 @@ export async function sendEmail(to: string, subject: string, html: string) {
         subject,
         text: 'Please view the report in HTML compatible email clients.',
         html,
+        "h:List-Unsubscribe": `<https://${process.env.MAILGUN_DOMAIN}/unsubscribe?email=${to}`
     };
 
     return mg.messages.create(domain, messageData);

@@ -1,51 +1,57 @@
-// src/app/components/HeaderTable.tsx
-
-import Link from 'next/link';
-import { FiExternalLink } from 'react-icons/fi';
-import { RepoDetails } from "@/types/github";
+import React from 'react';
+import { RepoDetails } from '@/types/github';
 
 interface HeaderTableProps {
     repos: RepoDetails[];
 }
 
+const headerCellStyle: React.CSSProperties = {
+    padding: '8px',
+    textAlign: 'left',
+    fontSize: '10px',
+    fontWeight: 'bold',
+    color: '#3182ce',
+    textTransform: 'uppercase',
+    borderBottom: '2px solid #cbd5e0',
+    backgroundColor: '#ebf8ff',
+};
+
+const cellStyle: React.CSSProperties = {
+    padding: '8px',
+    whiteSpace: 'nowrap',
+    borderBottom: '1px solid #e2e8f0',
+};
+
 export default function HeaderTable({ repos }: HeaderTableProps) {
     return (
-        <div className="overflow-x-auto mb-10">
-            <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-blue-50">
+        <div style={{ overflowX: 'auto', marginBottom: '10px' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                <thead>
                 <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">
-                        Repository
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">
-                        Stars
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">
-                        Forks
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">
-                        Contributors
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-blue-700 uppercase tracking-wider">
-                        Last Update
-                    </th>
+                    <th style={headerCellStyle}>Repository</th>
+                    <th style={headerCellStyle}>Stars</th>
+                    <th style={headerCellStyle}>Forks</th>
+                    <th style={headerCellStyle}>Contributors</th>
+                    <th style={headerCellStyle}>Last Update</th>
                 </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody style={{ backgroundColor: '#ffffff' }}>
                 {repos.map((repo) => (
                     <tr key={repo.id}>
-                        <td className="px-6 py-4 whitespace-nowrap flex items-center">
-                            <Link href={repo.html_url} legacyBehavior>
-                                <a className="flex items-center text-blue-700 hover:underline" target="_blank" rel="noopener noreferrer">
-                                    <FiExternalLink className="mr-2" />
-                                    {repo.name}
-                                </a>
-                            </Link>
+                        <td style={cellStyle}>
+                            <a
+                                href={repo.html_url}
+                                style={{ color: '#3182ce', textDecoration: 'none' }}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {repo.name}
+                            </a>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">{repo.stars}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">{repo.forks}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">{repo.contributors}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">{repo.updatedAt}</td>
+                        <td style={cellStyle}>{repo.stars}</td>
+                        <td style={cellStyle}>{repo.forks}</td>
+                        <td style={cellStyle}>{repo.contributors}</td>
+                        <td style={cellStyle}>{repo.updatedAt}</td>
                     </tr>
                 ))}
                 </tbody>

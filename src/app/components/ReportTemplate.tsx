@@ -1,3 +1,4 @@
+// src/app/components/ReportTemplate.tsx
 import React from 'react';
 import { RepoDetails } from '@/types/github';
 import { generateQuickChartUrl } from '@/utils/chart';
@@ -11,11 +12,11 @@ const ReportTemplate: React.FC<ReportTemplateProps> = ({ repos }) => {
         <html>
         <head>
             <title>Weekly GitHub Trend Report</title>
-            <meta charSet="UTF-8"/>
-            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            <meta charSet="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
             {/* Force light mode in email clients */}
-            <meta name="color-scheme" content="light"/>
-            <meta name="supported-color-schemes" content="light"/>
+            <meta name="color-scheme" content="light" />
+            <meta name="supported-color-schemes" content="light" />
         </head>
         <body
             style={{
@@ -52,7 +53,152 @@ const ReportTemplate: React.FC<ReportTemplateProps> = ({ repos }) => {
                                 >
                                     Weekly GitHub Trend Report
                                 </h1>
+
+                                {/* Header Table */}
+                                <table
+                                    width="100%"
+                                    border={0}
+                                    cellPadding={0}
+                                    cellSpacing={0}
+                                    style={{ marginBottom: '20px', borderCollapse: 'collapse' }}
+                                >
+                                    <thead>
+                                    <tr>
+                                        <th
+                                            style={{
+                                                padding: '8px',
+                                                textAlign: 'left',
+                                                fontSize: '10px',
+                                                fontWeight: 'bold',
+                                                color: '#3182ce',
+                                                textTransform: 'uppercase',
+                                                borderBottom: '2px solid #cbd5e0',
+                                                backgroundColor: '#ebf8ff',
+                                            }}
+                                        >
+                                            Repository
+                                        </th>
+                                        <th
+                                            style={{
+                                                padding: '8px',
+                                                textAlign: 'left',
+                                                fontSize: '10px',
+                                                fontWeight: 'bold',
+                                                color: '#3182ce',
+                                                textTransform: 'uppercase',
+                                                borderBottom: '2px solid #cbd5e0',
+                                                backgroundColor: '#ebf8ff',
+                                            }}
+                                        >
+                                            Stars
+                                        </th>
+                                        <th
+                                            style={{
+                                                padding: '8px',
+                                                textAlign: 'left',
+                                                fontSize: '10px',
+                                                fontWeight: 'bold',
+                                                color: '#3182ce',
+                                                textTransform: 'uppercase',
+                                                borderBottom: '2px solid #cbd5e0',
+                                                backgroundColor: '#ebf8ff',
+                                            }}
+                                        >
+                                            Forks
+                                        </th>
+                                        <th
+                                            style={{
+                                                padding: '8px',
+                                                textAlign: 'left',
+                                                fontSize: '10px',
+                                                fontWeight: 'bold',
+                                                color: '#3182ce',
+                                                textTransform: 'uppercase',
+                                                borderBottom: '2px solid #cbd5e0',
+                                                backgroundColor: '#ebf8ff',
+                                            }}
+                                        >
+                                            Contributors
+                                        </th>
+                                        <th
+                                            style={{
+                                                padding: '8px',
+                                                textAlign: 'left',
+                                                fontSize: '10px',
+                                                fontWeight: 'bold',
+                                                color: '#3182ce',
+                                                textTransform: 'uppercase',
+                                                borderBottom: '2px solid #cbd5e0',
+                                                backgroundColor: '#ebf8ff',
+                                            }}
+                                        >
+                                            Last Update
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody style={{ backgroundColor: '#ffffff' }}>
+                                    {repos.map((repo) => (
+                                        <tr key={repo.id}>
+                                            <td
+                                                style={{
+                                                    padding: '8px',
+                                                    whiteSpace: 'nowrap',
+                                                    borderBottom: '1px solid #e2e8f0',
+                                                }}
+                                            >
+                                                <a
+                                                    href={repo.html_url}
+                                                    target="_blank"
+                                                    style={{ color: '#3182ce', textDecoration: 'none' }}
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    {repo.name}
+                                                </a>
+                                            </td>
+                                            <td
+                                                style={{
+                                                    padding: '8px',
+                                                    whiteSpace: 'nowrap',
+                                                    borderBottom: '1px solid #e2e8f0',
+                                                }}
+                                            >
+                                                {repo.stars}
+                                            </td>
+                                            <td
+                                                style={{
+                                                    padding: '8px',
+                                                    whiteSpace: 'nowrap',
+                                                    borderBottom: '1px solid #e2e8f0',
+                                                }}
+                                            >
+                                                {repo.forks}
+                                            </td>
+                                            <td
+                                                style={{
+                                                    padding: '8px',
+                                                    whiteSpace: 'nowrap',
+                                                    borderBottom: '1px solid #e2e8f0',
+                                                }}
+                                            >
+                                                {repo.contributors}
+                                            </td>
+                                            <td
+                                                style={{
+                                                    padding: '8px',
+                                                    whiteSpace: 'nowrap',
+                                                    borderBottom: '1px solid #e2e8f0',
+                                                }}
+                                            >
+                                                {repo.updatedAt}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                    </tbody>
+                                </table>
+
                                 <hr style={{ borderTop: '2px solid #e5e7eb', margin: '20px 0' }} />
+
+                                {/* Detailed Repository Cards */}
                                 {repos.map((repo) => (
                                     <table
                                         key={repo.id}
@@ -80,11 +226,7 @@ const ReportTemplate: React.FC<ReportTemplateProps> = ({ repos }) => {
                                             <td>
                                                 <table width="100%" border={0} cellPadding={0} cellSpacing={0}>
                                                     <tr>
-                                                        <td
-                                                            width="66%"
-                                                            valign="top"
-                                                            style={{ paddingRight: '10px' }}
-                                                        >
+                                                        <td width="66%" valign="top" style={{ paddingRight: '10px' }}>
                                                             <h3
                                                                 style={{
                                                                     fontSize: '16px',
@@ -120,8 +262,7 @@ const ReportTemplate: React.FC<ReportTemplateProps> = ({ repos }) => {
                                                             </ul>
                                                         </td>
                                                         <td width="34%" valign="top">
-                                                            <div style={{height: '200px', position: 'relative'}}>
-                                                                {/* Embed QuickChart image */}
+                                                            <div style={{ height: '200px', position: 'relative' }}>
                                                                 <img
                                                                     src={generateQuickChartUrl(repo.trendData)}
                                                                     alt={`${repo.name} chart`}
@@ -138,7 +279,7 @@ const ReportTemplate: React.FC<ReportTemplateProps> = ({ repos }) => {
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style={{paddingTop: '16px'}}>
+                                            <td style={{ paddingTop: '16px' }}>
                                                 <table
                                                     width="100%"
                                                     border={0}
@@ -152,14 +293,16 @@ const ReportTemplate: React.FC<ReportTemplateProps> = ({ repos }) => {
                                                             valign="top"
                                                             style={{ paddingBottom: '8px' }}
                                                         >
-                                                            <strong style={{ color: '#10b981' }}>⭐ Stars:</strong> {repo.stars}
+                                                            <strong style={{ color: '#10b981' }}>⭐ Stars:</strong>{' '}
+                                                            {repo.stars}
                                                         </td>
                                                         <td
                                                             width="50%"
                                                             valign="top"
                                                             style={{ paddingBottom: '8px' }}
                                                         >
-                                                            <strong style={{ color: '#8b5cf6' }}>🍴 Forks:</strong> {repo.forks}
+                                                            <strong style={{ color: '#8b5cf6' }}>🍴 Forks:</strong>{' '}
+                                                            {repo.forks}
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -168,7 +311,10 @@ const ReportTemplate: React.FC<ReportTemplateProps> = ({ repos }) => {
                                                             valign="top"
                                                             style={{ paddingBottom: '8px' }}
                                                         >
-                                                            <strong style={{ color: '#3b82f6' }}>👀 Watchers:</strong> {repo.watchers}
+                                                            <strong style={{ color: '#3b82f6' }}>
+                                                                👀 Watchers:
+                                                            </strong>{' '}
+                                                            {repo.watchers}
                                                         </td>
                                                         <td
                                                             width="50%"
@@ -209,17 +355,6 @@ const ReportTemplate: React.FC<ReportTemplateProps> = ({ repos }) => {
                                         </tr>
                                     </table>
                                 ))}
-                                <hr style={{ borderTop: '1px solid #e5e7eb', margin: '20px 0' }} />
-                                <p
-                                    style={{
-                                        fontSize: '12px',
-                                        color: '#6b7280',
-                                        textAlign: 'center',
-                                        margin: 0,
-                                    }}
-                                >
-                                    &copy; 2025 GitHub Trend Report. All rights reserved.
-                                </p>
                             </td>
                         </tr>
                     </table>
