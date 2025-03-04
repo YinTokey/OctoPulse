@@ -1,61 +1,71 @@
+// src/app/components/HeaderTable.tsx
+
 import React from 'react';
 import { RepoDetails } from '@/types/github';
+
+const styles = `
+  .header-table {
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .header-table th {
+    padding: 8px;
+    text-align: left;
+    font-size: 10px;
+    font-weight: bold;
+    color: #3182ce;
+    text-transform: uppercase;
+    border-bottom: 2px solid #cbd5e0;
+    background-color: #ebf8ff;
+  }
+  .header-table td {
+    padding: 8px;
+    white-space: nowrap;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .header-table a {
+    color: #3182ce;
+    text-decoration: none;
+  }
+`;
 
 interface HeaderTableProps {
     repos: RepoDetails[];
 }
 
-const headerCellStyle: React.CSSProperties = {
-    padding: '8px',
-    textAlign: 'left',
-    fontSize: '10px',
-    fontWeight: 'bold',
-    color: '#3182ce',
-    textTransform: 'uppercase',
-    borderBottom: '2px solid #cbd5e0',
-    backgroundColor: '#ebf8ff',
-};
-
-const cellStyle: React.CSSProperties = {
-    padding: '8px',
-    whiteSpace: 'nowrap',
-    borderBottom: '1px solid #e2e8f0',
-};
-
-export default function HeaderTable({ repos }: HeaderTableProps) {
+const HeaderTable: React.FC<HeaderTableProps> = ({ repos }) => {
     return (
-        <div style={{ overflowX: 'auto', marginBottom: '10px' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+        <>
+            <style>{styles}</style>
+            <table className="header-table" border={0} cellPadding={0} cellSpacing={0}>
                 <thead>
                 <tr>
-                    <th style={headerCellStyle}>Repository</th>
-                    <th style={headerCellStyle}>Stars</th>
-                    <th style={headerCellStyle}>Forks</th>
-                    <th style={headerCellStyle}>Contributors</th>
-                    <th style={headerCellStyle}>Last Update</th>
+                    <th>Repository</th>
+                    <th>Stars</th>
+                    <th>Forks</th>
+                    <th>Contributors</th>
+                    <th>Last Update</th>
                 </tr>
                 </thead>
-                <tbody style={{ backgroundColor: '#ffffff' }}>
+                <tbody>
                 {repos.map((repo) => (
                     <tr key={repo.id}>
-                        <td style={cellStyle}>
-                            <a
-                                href={repo.html_url}
-                                style={{ color: '#3182ce', textDecoration: 'none' }}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
+                        <td>
+                            <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
                                 {repo.name}
                             </a>
                         </td>
-                        <td style={cellStyle}>{repo.stars}</td>
-                        <td style={cellStyle}>{repo.forks}</td>
-                        <td style={cellStyle}>{repo.contributors}</td>
-                        <td style={cellStyle}>{repo.updatedAt}</td>
+                        <td>{repo.stars}</td>
+                        <td>{repo.forks}</td>
+                        <td>{repo.contributors}</td>
+                        <td>{repo.updatedAt}</td>
                     </tr>
                 ))}
                 </tbody>
             </table>
-        </div>
+        </>
     );
-}
+};
+
+export default HeaderTable;
