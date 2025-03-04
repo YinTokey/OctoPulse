@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "vercel-build": "yarn global add node-gyp sharp"
   },
   "dependencies": {
     "@react-email/components": "^0.0.33",
