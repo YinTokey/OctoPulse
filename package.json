@@ -10,6 +10,7 @@
     "vercel-build": "next build"
   },
   "dependencies": {
+    "@netlify/functions": "^3.0.1",
     "@react-email/components": "^0.0.33",
     "@react-email/render": "^1.0.5",
     "axios": "^1.8.1",
@@ -32,6 +33,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.2.0",
+    "netlify-cli": "^19.0.0",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2"
