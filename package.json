@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-email/components": "^0.0.33",
     "@react-email/render": "^1.0.5",
+    "@types/mailgun-js": "^0.22.18",
     "axios": "^1.8.1",
     "cheerio": "^1.0.0",
     "form-data": "^4.0.2",
@@ -22,7 +23,8 @@
     "quickchart": "^1.1.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-icons": "^5.5.0"
+    "react-icons": "^5.5.0",
+    "ts-mailgun": "^0.5.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

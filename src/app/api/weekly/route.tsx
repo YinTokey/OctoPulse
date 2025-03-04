@@ -3,7 +3,7 @@ import githubAPI from "@/utils/githubAPI";
 import {RepoDetails, RepoResponse, TrendInfo} from "@/types/github";
 import { formatUpdatedAt } from "@/utils/date";
 import ReportTemplate from '@/app/components/ReportTemplate';
-//import { sendEmail } from "@/utils/mailer";
+import { sendEmail } from "@/utils/mailer";
 import { render } from '@react-email/render';
 
 function mapRepoData(apiRepo: RepoResponse): RepoDetails {
@@ -53,7 +53,7 @@ export async function GET() {
 
     const emailHtml = await render(<ReportTemplate repos={repos} />);
     console.log(emailHtml.length)
-    // await sendEmail(process.env.TEST_EMAIL || '', 'Weekly Report', emailHtml);
+    await sendEmail(process.env.TEST_EMAIL || '', 'Weekly Report', emailHtml);
 
     return new Response(
         JSON.stringify({
