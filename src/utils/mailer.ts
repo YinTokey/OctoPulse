@@ -13,7 +13,7 @@ import { NodeMailgun } from 'ts-mailgun';
 const mailer = new NodeMailgun();
 mailer.apiKey = process.env.MAILGUN_API_KEY as string
 mailer.domain = process.env.MAILGUN_DOMAIN as string;
-mailer.fromEmail = process.env.MAILGUN_FROM as string;
+mailer.fromEmail = process.env.MAILGUN_FROM as string || 'mailgun@' + mailer.domain; //
 mailer.fromTitle = 'Weekly report'; //
 mailer.init();
 
